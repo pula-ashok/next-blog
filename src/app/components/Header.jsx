@@ -1,4 +1,6 @@
 'use client'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { dark,light } from '@clerk/themes'
 import { Button, Navbar, TextInput } from 'flowbite-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
@@ -30,11 +32,16 @@ const Header = () => {
         <Button className='w-12 h-10 hidden sm:inline' color='gray' onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
          {theme==='light'?<FaMoon/>:<FaSun/>}
         </Button>
-        <Link href={'/sign-in'}>
-        <Button gradientDuoTone="purpleToBlue" outline>
-          Sign In
-        </Button>
-        </Link>        
+        <SignedIn>
+          <UserButton appearance={{baseTheme:theme==='light'?light:dark}} />
+        </SignedIn>
+        <SignedOut>
+          {/* <Link href={"/sign-in"}> */}
+            <Button gradientDuoTone="purpleToBlue" outline>
+             <SignInButton/>
+            </Button>
+          {/* </Link> */}
+        </SignedOut>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
