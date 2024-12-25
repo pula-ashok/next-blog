@@ -54,9 +54,9 @@ export async function POST(req) {
   console.log('Webhook payload:', body)
   
   if(eventType==='user.created'||eventType==='user.updated'){
-    const {id,first_name,last_name,email,username,profile_picture,is_admin}=evt.data
+    const {id,first_name,last_name,email_addresses,username,profile_picture}=evt.data
     try {
-      const user=await createOrUpdateUser(id,first_name,last_name,email,profile_picture,username)
+      const user=await createOrUpdateUser(id,first_name,last_name,email_addresses,profile_picture,username)
       if(user&&eventType==='user.created'){
         try {
           await clerkClient.users.updateUserMetadata(id,{
