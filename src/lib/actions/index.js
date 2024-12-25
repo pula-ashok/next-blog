@@ -4,14 +4,9 @@ import User from '../models/User';
 import { connectDB } from './../mongodb/mongoose';
 
 export const createOrUpdateUser = async (
-  id,
-  first_name,
-  last_name,
-  image_url,
-  email_addresses,
-  username
+  id,first_name,last_name,email_addresses,image_url,username
 ) => {
-  console.log("shiva",id,first_name,last_name,image_url,email_addresses,username)
+  console.log("shiva",id,first_name,last_name,email_addresses,image_url,username)
   console.log("is it working?")
   try {
     await connectDB();
