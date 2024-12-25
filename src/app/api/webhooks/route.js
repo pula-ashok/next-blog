@@ -55,9 +55,9 @@ export async function POST(req) {
   
   if(eventType==='user.created'||eventType==='user.updated'){
     console.log("ashok",evt?.data)
-    const {id,first_name,last_name,email_addresses,username,profile_picture}=evt?.data
+    const {id,first_name,last_name,email_addresses,username,image_url}=evt?.data
     try {
-      const user=await createOrUpdateUser(id,first_name,last_name,email_addresses,profile_picture,username)
+      const user=await createOrUpdateUser(id,first_name,last_name,email_addresses,image_url,username)
       if(user&&eventType==='user.created'){
         try {
           await clerkClient.users.updateUserMetadata(id,{
