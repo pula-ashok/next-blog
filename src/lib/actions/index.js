@@ -11,6 +11,8 @@ export const createOrUpdateUser = async (
   email_addresses,
   username
 ) => {
+  console.log("shiva",id,first_name,last_name,image_url,email_addresses,username)
+  console.log("is it working?")
   try {
     await connectDB();
     const user = await User.findOneAndUpdate(
