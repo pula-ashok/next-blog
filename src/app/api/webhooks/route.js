@@ -1,5 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
+import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
+import { createOrUpdateUser, deleteUser } from '@/lib/actions'
 
 export async function POST(req) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -50,15 +52,37 @@ export async function POST(req) {
   const eventType = evt.type
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
   console.log('Webhook payload:', body)
-  if(eventType==='user.created'){
-    console.log('User created')
-  }
-  if(eventType==='user.updated'){
-    console.log('User updated')
+  
+  if(eventType==='user.created'||eventType==='user.updated'){
+    const {id,first_name,last_name,email,username,profile_picture,is_admin}=evt.data
+    try {
+      const user=await createOrUpdateUser(id,first_name,last_name,email,profile_picture,username)
+      if(user&&eventType==='user.created'){
+        try {
+          await clerkClient.users.updateUserMetadata(id,{
+            publicMetadata:{
+              userMongoId:user._id,
+              isAdmin:user.isAdmin
+            }
+          })
+          return new Response(user,{status:200})
+        } catch (error) {
+          return new Response(error,{status:500})
+        }
+      }
+      return new Response(user,{status:200})
+    } catch (error) {
+      return new Response(error,{status:500})
+    }
   }
   if(eventType==='user.deleted'){
-    console.log('User deleted')
+    const {id}=evt.data
+    try {
+      await deleteUser(id)
+      return new Response('User deleted',{status:200})
+    } catch (error) {
+      return new Response(error,{status:500})
+    }
   }
-
   return new Response('Webhook received', { status: 200 })
 }
