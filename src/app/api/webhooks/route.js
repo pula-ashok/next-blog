@@ -65,7 +65,6 @@ export async function POST(req) {
               isAdmin:user.isAdmin
             }
           })
-          return new Response(user,{status:200})
         } catch (error) {
           return new Response(error,{status:500})
         }
