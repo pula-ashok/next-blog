@@ -7,8 +7,8 @@ import "react-quill-new/dist/quill.snow.css";
 import React, { useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '@/firebase'
-import 'react-circular-progressbar/dist/styles.css';
-import { CircularProgressbar } from 'react-circular-progressbar'
+// import 'react-circular-progressbar/dist/styles.css';
+// import { CircularProgressbar } from 'react-circular-progressbar'
 const CreatePost = () => {
     const {isSignedIn,user,isLoaded}=useUser()
     const [file, setFile] = useState(null)
@@ -75,9 +75,10 @@ const CreatePost = () => {
                     <div className=" flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
                         <FileInput type='file' accept="image/*" ref={fileRef} onChange={e=>{setFile(e.target.files[0]);setImageUploadError(null)}}/>
                         <Button type='button' size='sm' outline gradientDuoTone='purpleToBlue' disabled={imageUploadError} onClick={handleImageUpload}>
-                            {imageUploadProgress ? <div className='w-16 h-16'>
+                            {/* {imageUploadProgress ? <div className='w-16 h-16'>
                                 <CircularProgressbar value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
-                            </div> : 'Upload a Image'}
+                            </div> : 'Upload a Image'} */}
+                            Upload a Image
                         </Button>
                     </div>
                     {
