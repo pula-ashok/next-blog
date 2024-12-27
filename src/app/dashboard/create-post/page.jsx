@@ -7,7 +7,7 @@ import "react-quill-new/dist/quill.snow.css";
 import React, { useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '@/firebase'
-import 'react-circular-progressbar/dist/styles.css';
+// import 'react-circular-progressbar/dist/styles.css';
 // import { CircularProgressbar } from 'react-circular-progressbar'
 const CreatePost = () => {
     const {isSignedIn,user,isLoaded}=useUser()
