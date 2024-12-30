@@ -19,6 +19,7 @@ export const POST=async(req)=>{
             slug
         })
         await newPost.save()
+        console.log("test",newPost)
         return new Response(JSON.stringify(newPost),{status:200})
     } catch (error) {
         console.log(error)
