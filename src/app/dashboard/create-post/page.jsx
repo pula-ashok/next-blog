@@ -86,7 +86,7 @@ const CreatePost = () => {
     if(!isLoaded){
         return null
     }
-    if(isSignedIn && !user.publicMetadata.isAdmin){
+    if(isSignedIn && user.publicMetadata.isAdmin){
         return (
             <div className='max-w-3xl mx-auto min-h-screen p-3'>
                 <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>

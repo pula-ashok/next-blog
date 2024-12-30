@@ -5,7 +5,7 @@ export const POST=async(req)=>{
     const user=await currentUser()
     try {
         const data=await req.json()
-        console.log(data)
+        console.log(data,"test")
         if(!user ||user.publicMetadata.userMongodbId !==data.mongodbId || user.publicMetadata.isAdmin !==true){
             return new Response('Unauthorized',{status:401})            
         }
