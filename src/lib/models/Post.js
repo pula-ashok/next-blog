@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema=new mongoose.Schema({
-    userId:{type:String,required:true,unique},
+    userId:{type:String,required:true,unique:true},
     title:{type:String,required:true}, 
     content:{type:String,required:true}, 
     category:{type:String,default:"uncategorized"},
