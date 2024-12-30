@@ -11,7 +11,7 @@ export const POST=async(req)=>{
         }
         const slug=data.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g)
         const newPost=Post.create({
-            userId:user.publicMetadata.userMongodbId,
+            userId:user.publicMetadata.userMongoId,
             title:data.title,
             content:data.content,
             category:data.category,
