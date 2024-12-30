@@ -10,15 +10,15 @@ export const POST=async(req)=>{
             return new Response('Unauthorized',{status:401})            
         }
         const slug=data.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g)
-        const newPost= new Post({
-            userId:user.publicMetadata.userMongoId,
-            title:data.title,
-            content:data.content,
-            category:data.category,
-            image:data.image,
-            slug
-        })
-        await newPost.save()
+        const newPost = await Post.create({
+            userId: user.publicMetadata.userMongoId,
+            content: data.content,
+            title: data.title,
+            image: data.image,
+            category: data.category,
+            slug,
+          });
+          await newPost.save();
         console.log("test",newPost)
         return new Response(JSON.stringify(newPost),{status:200})
     } catch (error) {
