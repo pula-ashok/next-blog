@@ -6,7 +6,7 @@ export const POST=async(req)=>{
     try {
         const data=await req.json()
         console.log(data,"test")
-        if(!user ||user.publicMetadata.userMongodbId !==data.mongodbId || user.publicMetadata.isAdmin !==true){
+        if(!user ||user.publicMetadata.userMongoId !==data.userMongodbId || user.publicMetadata.isAdmin !==true){
             return new Response('Unauthorized',{status:401})            
         }
         const slug=data.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g)

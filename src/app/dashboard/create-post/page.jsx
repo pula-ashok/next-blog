@@ -65,7 +65,7 @@ const CreatePost = () => {
             const response=await fetch('/api/post/create-post',{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({...formData,userMongodbId:user.publicMetadata.userMongodbId||null})
+                body:JSON.stringify({...formData,userMongodbId:user.publicMetadata.userMongoId||null})
             })
             const data=await response.json()
             if(!res.ok){
