@@ -10,7 +10,7 @@ export const POST=async(req)=>{
             return new Response('Unauthorized',{status:401})            
         }
         const slug=data.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g)
-        const newPost=Post.create({
+        const newPost= new Post({
             userId:user.publicMetadata.userMongoId,
             title:data.title,
             content:data.content,
